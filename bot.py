@@ -36,7 +36,7 @@ from discord.ui import View, Button
 
 #region Initialisation
 # For developing only
-dev_disable_apis = True # Disable connecting to APIs such as bot websites
+dev_disable_apis = False # Disable connecting to APIs such as bot websites
 dev_active_single_guild = False # Make the bot only active in a certain guild
 dev_mode_guild_id = 574350984495628436 # If the above is true, bot must be in this guild already
 update_guild_data = False # Forces updating of newly added guild_data values after a ChadCounting update
@@ -45,9 +45,9 @@ update_guild_data = False # Forces updating of newly added guild_data values aft
 load_dotenv()
 BOT_TOKEN = os.getenv("PROD_TOKEN") # ChadCounting token (either PROD_TOKEN or DEV_TOKEN)
 guild_data = {} # Global variable for database
-bot_version = "1.0.3"
+bot_version = "1.0.4" # Current version of the bot
 chadcounting_color = 0xCA93FF # Color of the embeds
-image_gigachad = "https://github.com/Gitfoe/ChadCounting/blob/main/gigachad.jpeg?raw=true"
+image_gigachad = "https://github.com/RillJ/ChadCounting/blob/main/gigachad.jpeg?raw=true"
 
 # Initialize API tokens and URIs
 DISCORDBOTLIST_TOKEN = os.getenv("DISCORDBOTLIST_TOKEN")
@@ -744,10 +744,12 @@ class ViewHelpButtons(View):
     def __init__(self):
         super().__init__()
         buttons = [
-            {"label": "More information", "url": "https://github.com/Gitfoe/ChadCounting", "emoji": "ℹ️"},
-            {"label": "Vote on top.gg", "url": "https://top.gg/bot/1066081427935993886/vote", "emoji": "⬆️"},
-            {"label": "Vote on discordbotlist", "url": "https://discordbotlist.com/bots/chadcounting/upvote", "emoji": "⬆️"},
-            {"label": "Vote on discords", "url": "https://discords.com/bots/bot/1066081427935993886/vote", "emoji": "⬆️"},
+            {"label": "Vote on top.gg", "url": "https://top.gg/bot/1066081427935993886/vote", "emoji": "🗳️"},
+            {"label": "Vote on discordbotlist", "url": "https://discordbotlist.com/bots/chadcounting/upvote", "emoji": "⭐"},
+            {"label": "Vote on discords", "url": "https://discords.com/bots/bot/1066081427935993886/vote", "emoji": "🚀"},
+            {"label": "Bot Info", "url": "https://github.com/RillJ/ChadCounting", "emoji": "🤖"},
+            {"label": "Terms", "url": "https://wafoe.com/blog/2026/03/25/terms-of-service-for-chadcounting/", "emoji": "📜"},
+            {"label": "Privacy", "url": "https://wafoe.com/blog/2026/03/25/privacy-policy-for-chadcounting/", "emoji": "🛡️"},
         ]
         for button in buttons:
             self.add_item(Button(**button))
@@ -1282,4 +1284,4 @@ def push_guilds_count_to_bot_website(url, payload_string, headers):
 #endregion
 
 bot.run(BOT_TOKEN)
-# Coded by https://github.com/Gitfoe
+# Developed by https://github.com/RillJ

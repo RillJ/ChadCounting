@@ -39,14 +39,8 @@ The following commands could be used:
 
 ## Technical information
 ### Dependencies
-To run the Python program, the following dependencies need to be installed via `pip3`:
-```
-pip3 install -U discord.py (confirmed with version 2.3.2)
-pip3 install -U python-dotenv (confirmed with version 1.0.0)
-pip3 install -U emoji (confirmed with version 2.8.0)
-pip3 install -U matplotlib (confirmed with version 3.8.0)
-pip3 install -U pytz (confirmed with version 2023.3.post1)
-```
+To run the Python program, the dependencies listed in `requirements.txt` need to be installed via `pip`.
+
 ### Discord Developer Portal bot settings
 When creating your own fork of ChadCounting, ensure your bot has at least the `Send Message`, `Read Message History` and `Add Reactions` OAuth2 permissions. `Use External Emojis` is an optional permission, but recommended. The scope should be `bot`.
 
@@ -81,3 +75,8 @@ To properly manage versioning, it is recommended to update the `bot_version` var
 - `PATCH` version is increased for backward-compatible bug fixes.
 
 When you are working on a new version and commit to the `dev` branch, ensure the version temporarily ends with `-indev` to indicate that the version is in development and might not function yet.
+
+## Legal & Privacy
+To ensure a safe and transparent experience for all users, ChadCounting operates under the following guidelines:
+- [Terms of Service](https://wafoe.com/blog/2026/03/25/terms-of-service-for-chadcounting/): Rules for using the ChadCounting service.
+- [Privacy Policy](https://wafoe.com/blog/2026/03/25/privacy-policy-for-chadcounting/): Details what data ChadCounting collects and how it is used to provide the service.
