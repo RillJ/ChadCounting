@@ -1,0 +1,6 @@
+requests
+discord.py
+python-dotenv
+emoji
+matplotlib
+pytz
