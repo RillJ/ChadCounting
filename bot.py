@@ -45,7 +45,7 @@ update_guild_data = False # Forces updating of newly added guild_data values aft
 load_dotenv()
 BOT_TOKEN = os.getenv("PROD_TOKEN") # ChadCounting token (either PROD_TOKEN or DEV_TOKEN)
 guild_data = {} # Global variable for database
-bot_version = "1.0.4" # Current version of the bot
+bot_version = "1.0.5" # Current version of the bot
 chadcounting_color = 0xCA93FF # Color of the embeds
 image_gigachad = "https://github.com/RillJ/ChadCounting/blob/main/gigachad.jpeg?raw=true"
 
@@ -112,7 +112,7 @@ async def on_message_delete(message):
     guild_id = message.guild.id
     user_id = message.author.id
     # If a deleted message is not by someone who counted before, there's no need to continue
-    if user_id not in guild_data[guild_id]:
+    if user_id not in guild_data[guild_id]["users"]:
         return
     current_count = guild_data[guild_id]["current_count"]
     last_count = guild_data[guild_id]["previous_message"]
@@ -136,7 +136,7 @@ async def on_message_delete(message):
         if success_user_banned == True:
             full_text += f" They are now banned for {minutes_to_fancy_string(ban_time_for_troll)} and can't continue counting."
         elif success_user_banned == False:
-            full_text += " However, as they have never counted with ChadCounting before, they won't get banned. Very lucky..."
+            full_text += " However, they have not been banned. Very lucky..."
         embed.add_field(name="", value=full_text, inline=False)
         embed.add_field(name="", value=f"The current count is **{current_count}**. Continue counting from there!", inline=False)
         counting_channel = bot.get_channel(guild_data[guild_id]["counting_channel"])
@@ -635,7 +635,7 @@ def check_dev_disable_apis(executing_method_name):
 
 #region Command helper functions
 async def handle_reaction_setting(interaction, reactions, embed):
-    """Handles the reaction setting and sends the response. Part of /setreactions command."""
+    """Handles the reaction setting and sends the response. Part of /set reactions command."""
     changes_string = "\nNo changes were made to the reactions. Try again, chad."
     emoji_string = extract_discord_emoji(reactions)
     emoji_string_length = len(emoji_string)
@@ -676,7 +676,8 @@ async def check_correct_channel(interaction):
     channel_error = f"You can only execute ChadCounting commands in the counting channel, "
     if counting_channel == None:
         channel_error += (f"however, it has not been set yet. " +
-                          f"If you are an admin of this server, use the command `/set channel` in the channel you want to count in.")
+                          f"If you are an admin of this server, use the command `/set channel` in the channel you want to count in." +
+                          f"Do not forget to read the Terms of Service and the Privacy Policy before using the bot! Use `/help` for more information.")
         embed.add_field(name="", value=channel_error)
         await interaction.response.send_message(embed=embed, ephemeral=True)
         return False
@@ -795,7 +796,8 @@ class SetCog(commands.GroupCog, name="set", description="Admins only: sets and c
                     guild_data[guild_id]["previous_message"] = datetime.now()
                 write_guild_data(guild_data)
                 embed = chadcounting_embed("ChadCounting channel set")
-                embed.add_field(name="", value=f"The counting channel is now **'{interaction.channel}'**.")
+                embed.add_field(name="", value=f"The counting channel is now **'{interaction.channel}'**." +
+                                               f"Do not forget to read the Terms of Service and the Privacy Policy before using the bot! Use `/help` for more information.")
             else:
                 embed = chadcounting_embed("ChadCounting channel not set")
                 embed.add_field(name="", value="Sorry, you don't have the rights to change the channel for counting.")
